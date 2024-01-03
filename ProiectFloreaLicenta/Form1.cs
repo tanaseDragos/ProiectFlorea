@@ -22,16 +22,8 @@ namespace ProiectFloreaLicenta
         public Form1()
         {
             InitializeComponent();
-            fetchRate.Items.AddRange(fetchArray);
-            instructionBufferSize.Items.AddRange(instructionBufferArray);
-            irMax.Items.AddRange(issueRateArray);
-            nPen.Items.AddRange(nPenArray);
-            nrSetRegistrii.Items.AddRange(nrSetRegistriiArray);
-            blockSize.Items.AddRange(blockSizeArray);
-            blockSizeDC.Items.AddRange(blockSizeArray);
-            sizeDC.Items.AddRange(sizeBlockArray);
-            sizeIC.Items.AddRange(sizeBlockArray);
 
+            addRanges();
             setFirstIndexes();
 
         }
@@ -47,6 +39,19 @@ namespace ProiectFloreaLicenta
             blockSizeDC.SelectedIndex = 0;
             sizeDC.SelectedIndex = 0;
             sizeIC.SelectedIndex = 0;
+        }
+
+        public void addRanges()
+        {
+            fetchRate.Items.AddRange(fetchArray);
+            instructionBufferSize.Items.AddRange(instructionBufferArray);
+            irMax.Items.AddRange(issueRateArray);
+            nPen.Items.AddRange(nPenArray);
+            nrSetRegistrii.Items.AddRange(nrSetRegistriiArray);
+            blockSize.Items.AddRange(blockSizeArray);
+            blockSizeDC.Items.AddRange(blockSizeArray);
+            sizeDC.Items.AddRange(sizeBlockArray);
+            sizeIC.Items.AddRange(sizeBlockArray);
         }
 
         private void fetchRate_SelectedIndexChanged(object sender, EventArgs e)
@@ -67,11 +72,17 @@ namespace ProiectFloreaLicenta
 
         }
 
+
+        private void blockSizeDC_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            blockSize.Text = blockSizeDC.SelectedItem.ToString();
+        }
+
         private void alegeFisier_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-             
+
                 openFileDialog.Filter = "All files (*.*)|*.*"; // You can change this to filter specific file types
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -88,9 +99,5 @@ namespace ProiectFloreaLicenta
             Application.Exit();
         }
 
-        private void blockSizeDC_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            blockSize.Text = blockSizeDC.SelectedItem.ToString();
-        }
     }
 }
