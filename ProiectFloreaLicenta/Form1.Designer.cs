@@ -253,7 +253,7 @@
             // 
             this.pathFisier.Location = new System.Drawing.Point(13, 289);
             this.pathFisier.Name = "pathFisier";
-            this.pathFisier.Size = new System.Drawing.Size(172, 20);
+            this.pathFisier.Size = new System.Drawing.Size(104, 20);
             this.pathFisier.TabIndex = 9;
             // 
             // button2

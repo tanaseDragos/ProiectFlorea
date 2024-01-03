@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,8 +89,9 @@ namespace ProiectFloreaLicenta
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     string filePath = openFileDialog.FileName;
+                    string fileName = Path.GetFileName(filePath);
 
-                    pathFisier.Text = filePath;
+                    pathFisier.Text = fileName;
                 }
             }
         }
