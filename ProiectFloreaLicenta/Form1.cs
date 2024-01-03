@@ -83,7 +83,7 @@ namespace ProiectFloreaLicenta
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
 
-                openFileDialog.Filter = "All files (*.*)|*.*"; // You can change this to filter specific file types
+                openFileDialog.Filter = "All files (*.trc)|*.trc";
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
