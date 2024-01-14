@@ -41,8 +41,6 @@
             this.instructionBufferSize = new System.Windows.Forms.ComboBox();
             this.irMax = new System.Windows.Forms.ComboBox();
             this.fetchRate = new System.Windows.Forms.ComboBox();
-            this.alegeFisier = new System.Windows.Forms.Button();
-            this.pathFisier = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -63,8 +61,8 @@
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.biport = new System.Windows.Forms.RadioButton();
+            this.uniport = new System.Windows.Forms.RadioButton();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.sizeDC = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -75,6 +73,8 @@
             this.label16 = new System.Windows.Forms.Label();
             this.blockSize = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.traceFilesListBox = new System.Windows.Forms.ListBox();
+            this.parsareFisier = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.latenta)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -239,26 +239,9 @@
             this.fetchRate.SelectedIndexChanged += new System.EventHandler(this.fetchRate_SelectedIndexChanged);
             this.fetchRate.TextUpdate += new System.EventHandler(this.fetchRate_SelectedIndexChanged);
             // 
-            // alegeFisier
-            // 
-            this.alegeFisier.Location = new System.Drawing.Point(12, 260);
-            this.alegeFisier.Name = "alegeFisier";
-            this.alegeFisier.Size = new System.Drawing.Size(75, 23);
-            this.alegeFisier.TabIndex = 8;
-            this.alegeFisier.Text = "Alege fisier";
-            this.alegeFisier.UseVisualStyleBackColor = true;
-            this.alegeFisier.Click += new System.EventHandler(this.alegeFisier_Click);
-            // 
-            // pathFisier
-            // 
-            this.pathFisier.Location = new System.Drawing.Point(13, 289);
-            this.pathFisier.Name = "pathFisier";
-            this.pathFisier.Size = new System.Drawing.Size(104, 20);
-            this.pathFisier.TabIndex = 9;
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 315);
+            this.button2.Location = new System.Drawing.Point(12, 250);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 52);
             this.button2.TabIndex = 10;
@@ -267,7 +250,7 @@
             // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(13, 373);
+            this.exitButton.Location = new System.Drawing.Point(12, 312);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(75, 35);
             this.exitButton.TabIndex = 11;
@@ -286,7 +269,7 @@
             this.groupBox2.Controls.Add(this.textBox2);
             this.groupBox2.Controls.Add(this.textBox1);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(254, 260);
+            this.groupBox2.Location = new System.Drawing.Point(367, 260);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 162);
             this.groupBox2.TabIndex = 12;
@@ -370,7 +353,7 @@
             this.groupBox3.Controls.Add(this.textBox7);
             this.groupBox3.Controls.Add(this.textBox8);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(498, 260);
+            this.groupBox3.Location = new System.Drawing.Point(613, 260);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(204, 162);
             this.groupBox3.TabIndex = 20;
@@ -431,8 +414,8 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.label15);
-            this.groupBox4.Controls.Add(this.radioButton2);
-            this.groupBox4.Controls.Add(this.radioButton1);
+            this.groupBox4.Controls.Add(this.biport);
+            this.groupBox4.Controls.Add(this.uniport);
             this.groupBox4.Controls.Add(this.groupBox6);
             this.groupBox4.Controls.Add(this.groupBox5);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -453,27 +436,27 @@
             this.label15.TabIndex = 14;
             this.label15.Text = "= FR";
             // 
-            // radioButton2
+            // biport
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(6, 187);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(75, 24);
-            this.radioButton2.TabIndex = 3;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Biport";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.biport.AutoSize = true;
+            this.biport.Location = new System.Drawing.Point(6, 187);
+            this.biport.Name = "biport";
+            this.biport.Size = new System.Drawing.Size(75, 24);
+            this.biport.TabIndex = 3;
+            this.biport.TabStop = true;
+            this.biport.Text = "Biport";
+            this.biport.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // uniport
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(6, 159);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(86, 24);
-            this.radioButton1.TabIndex = 2;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Uniport";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.uniport.AutoSize = true;
+            this.uniport.Location = new System.Drawing.Point(6, 159);
+            this.uniport.Name = "uniport";
+            this.uniport.Size = new System.Drawing.Size(86, 24);
+            this.uniport.TabIndex = 2;
+            this.uniport.TabStop = true;
+            this.uniport.Text = "Uniport";
+            this.uniport.UseVisualStyleBackColor = true;
             // 
             // groupBox6
             // 
@@ -589,18 +572,36 @@
             this.label11.TabIndex = 13;
             this.label11.Text = "Block Size:";
             // 
+            // traceFilesListBox
+            // 
+            this.traceFilesListBox.FormattingEnabled = true;
+            this.traceFilesListBox.Location = new System.Drawing.Point(93, 250);
+            this.traceFilesListBox.Name = "traceFilesListBox";
+            this.traceFilesListBox.Size = new System.Drawing.Size(120, 160);
+            this.traceFilesListBox.TabIndex = 21;
+            // 
+            // parsareFisier
+            // 
+            this.parsareFisier.Location = new System.Drawing.Point(219, 250);
+            this.parsareFisier.Name = "parsareFisier";
+            this.parsareFisier.Size = new System.Drawing.Size(75, 43);
+            this.parsareFisier.TabIndex = 22;
+            this.parsareFisier.Text = "Parseaza Fisier";
+            this.parsareFisier.UseVisualStyleBackColor = true;
+            this.parsareFisier.Click += new System.EventHandler(this.parsareFisier_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1388, 450);
+            this.Controls.Add(this.parsareFisier);
+            this.Controls.Add(this.traceFilesListBox);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.pathFisier);
-            this.Controls.Add(this.alegeFisier);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Simulator Cache";
@@ -618,7 +619,6 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -637,8 +637,6 @@
         private System.Windows.Forms.ComboBox nPen;
         private System.Windows.Forms.ComboBox nrSetRegistrii;
         private System.Windows.Forms.NumericUpDown latenta;
-        private System.Windows.Forms.Button alegeFisier;
-        private System.Windows.Forms.TextBox pathFisier;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -660,8 +658,8 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton biport;
+        private System.Windows.Forms.RadioButton uniport;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox blockSize;
         private System.Windows.Forms.Label label11;
@@ -671,6 +669,8 @@
         private System.Windows.Forms.ComboBox blockSizeDC;
         private System.Windows.Forms.ComboBox sizeDC;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ListBox traceFilesListBox;
+        private System.Windows.Forms.Button parsareFisier;
     }
 }
 
