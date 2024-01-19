@@ -13,17 +13,23 @@ namespace ProiectFloreaLicenta
 {
     public partial class Form1 : Form
     {
-        int TICKS = 0;
+        double TICKS = 0;
         int nrInstrProcesate = 0;
         int nrBranchProcesate = 0;
         int nrStoreProcesate = 0;
         int nrLoadProcesate = 0;
         int nrArithProcesate = 0;
         int acceseDisponibileLaMemoriePerCiclu;
+        int PCnormal = 0;
+        double missCache = 0.1;
+        Instructiune[,] instructiuniAduseDinMemorie;
+        List<Instructiune> instructiuniCititeDinBenchmark;
+        int numberOfInstructions = 0;
+        int deCateOriAFostAccesataMemoria = 0;
         public Form1()
         {
             InitializeComponent();
-
+            
             addRanges();
             setFirstIndexes();
             verificareAcceseDisponibileLaMemorie();
@@ -90,6 +96,7 @@ namespace ProiectFloreaLicenta
             blockSizeDC.Items.AddRange(ConvertToIntArray(Settings.BlockSizeArray));
             sizeDC.Items.AddRange(ConvertToIntArray(Settings.SizeBlockArray));
             sizeIC.Items.AddRange(ConvertToIntArray(Settings.SizeBlockArray));
+            
             traceFilesListBox.Items.Add("FBUBBLE.TRC");
             traceFilesListBox.Items.Add("FMATRIX.TRC");
             traceFilesListBox.Items.Add("FPERM.TRC");
@@ -140,10 +147,13 @@ namespace ProiectFloreaLicenta
 
                 try
                 {
+                    int selectedIRMaxDePeInterfata = Convert.ToInt32(irMax.SelectedItem.ToString());
                     var citireBenchmark = new CitireBenchmark();
-                    var instructions = citireBenchmark.parsareFisierTrc(filePath);
-
+                    instructiuniCititeDinBenchmark = citireBenchmark.parsareFisierTrc(filePath);
+                    instructiuniAduseDinMemorie = citireBenchmark.ProcessInstructionsIntoMatrix(instructiuniCititeDinBenchmark, selectedIRMaxDePeInterfata);
+                    
                     MessageBox.Show("Fisierul a fost parsat cu succes.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
                 }
                 catch (Exception ex)
                 {
@@ -157,10 +167,110 @@ namespace ProiectFloreaLicenta
             }
         }
 
+        public void ProcessInstructions(List<Instructiune> instructiuniCititeDinBenchmark)
+        {
+            
+            foreach (Instructiune instructiune in instructiuniCititeDinBenchmark)
+            {   // aici am procesat deja B L SI S si nu mai e nev. de metodele acelea
+                numberOfInstructions = instructiuniCititeDinBenchmark.Count;
+                while (instructiune.pcCurent != PCnormal)
+                {
+                    PCnormal++;
+                    nrArithProcesate++;
+                }
+
+                if (instructiune.tipInstructine == "B")
+                {
+                    PCnormal = instructiune.target;
+                    nrBranchProcesate++;
+                }
+                else if (instructiune.tipInstructine == "S")
+                {
+                    PCnormal++;
+                    nrStoreProcesate++;
+                }
+                else if (instructiune.tipInstructine == "L")
+                {
+                    PCnormal++;
+                    nrLoadProcesate++;
+                }
+            }
+        }
+
+        
+        public double calculateLatency(int numberOfInstructions, int irMax)
+        {
+            
+            int latency = (int)latenta.Value;
+            int rowsWith2Instructions = 0;
+
+            if (irMax >= 2)
+            {
+                
+                if (irMax == 2)
+                {
+                    rowsWith2Instructions = numberOfInstructions / irMax;
+                }
+                if (numberOfInstructions % irMax == 2)
+                {
+                    rowsWith2Instructions++;
+                }
+            }
+
+            
+            TICKS = rowsWith2Instructions * latency;
+            return TICKS;
+        }
+       
+
+        
+
         private void exitButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        private void startSimulare_Click(object sender, EventArgs e)
+        {
+            int latency = (int)latenta.Value;
+            int selectedIRMaxDePeInterfata = Convert.ToInt32(irMax.SelectedItem.ToString());
+            int numarPen = Convert.ToInt32(nPen.SelectedItem.ToString());
+            ProcessInstructions(instructiuniCititeDinBenchmark);
+            calculateLatency(numberOfInstructions, selectedIRMaxDePeInterfata);
+            foreach(Instructiune instructiune in instructiuniAduseDinMemorie)
+            {
+                if (instructiune == null)
+                {
+                    break;
+                }
+                if (deCateOriAFostAccesataMemoria < acceseDisponibileLaMemoriePerCiclu)
+                {
+                    if (instructiune.tipInstructine == "L" || instructiune.tipInstructine == "S" )
+                    {
+                        deCateOriAFostAccesataMemoria++;
+                    }
+                    
+                }
+                else
+                {
+                    if (instructiune.tipInstructine == "L" || instructiune.tipInstructine == "S")
+                    {
+                        deCateOriAFostAccesataMemoria = 0;
+                        TICKS += latency;
+                    }
+                }
+            }
+
+            double penalizareMissCache = nrLoadProcesate * missCache * numarPen;
+            TICKS += penalizareMissCache;
+
+            ticksTextBox.Text = TICKS.ToString();
+            loadTextBox.Text = nrLoadProcesate.ToString();
+            storeTextBox.Text = nrStoreProcesate.ToString();
+            branchTextBox.Text = nrBranchProcesate.ToString();
+            int total = nrLoadProcesate + nrStoreProcesate + nrBranchProcesate;
+            totalTextBox.Text = total.ToString();
+         
+        }
     }
 }

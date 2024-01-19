@@ -11,7 +11,7 @@ namespace ProiectFloreaLicenta
     {
         public String tipInstructine { get; set; }
         public int pcCurent { get; set; }   
-        public int target { get; set; }   
+        public int target { get; set; }
 
         public Instructiune(string tipInstructiune, int pcCurent, int target)
         {
