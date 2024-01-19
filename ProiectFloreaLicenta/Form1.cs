@@ -171,7 +171,7 @@ namespace ProiectFloreaLicenta
         {
             
             foreach (Instructiune instructiune in instructiuniCititeDinBenchmark)
-            {   // aici am procesat deja B L SI S si nu mai e nev. de metodele acelea
+            {   
                 numberOfInstructions = instructiuniCititeDinBenchmark.Count;
                 while (instructiune.pcCurent != PCnormal)
                 {
@@ -237,8 +237,10 @@ namespace ProiectFloreaLicenta
             int numarPen = Convert.ToInt32(nPen.SelectedItem.ToString());
             ProcessInstructions(instructiuniCititeDinBenchmark);
             calculateLatency(numberOfInstructions, selectedIRMaxDePeInterfata);
-            foreach(Instructiune instructiune in instructiuniAduseDinMemorie)
-            {
+ 
+
+            foreach (Instructiune instructiune in instructiuniAduseDinMemorie)
+            {   
                 if (instructiune == null)
                 {
                     break;
@@ -270,7 +272,12 @@ namespace ProiectFloreaLicenta
             branchTextBox.Text = nrBranchProcesate.ToString();
             int total = nrLoadProcesate + nrStoreProcesate + nrBranchProcesate;
             totalTextBox.Text = total.ToString();
-         
+            double IR = (double)total / TICKS;
+            issueRateTextBox.Text = IR.ToString();
+            double irSIMULTAN = total/(TICKS+penalizareMissCache);
+            influentaIrTextBox.Text = irSIMULTAN.ToString(); // 2.1 
+            double oneCycle = TICKS;
+            oneCycleTextBox.Text = oneCycle.ToString();
         }
     }
 }

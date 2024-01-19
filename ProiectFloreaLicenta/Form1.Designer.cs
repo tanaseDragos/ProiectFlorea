@@ -75,6 +75,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.traceFilesListBox = new System.Windows.Forms.ListBox();
             this.parsareFisier = new System.Windows.Forms.Button();
+            this.influentaIR = new System.Windows.Forms.Label();
+            this.influentaIrTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.latenta)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -373,6 +375,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.influentaIrTextBox);
+            this.groupBox3.Controls.Add(this.influentaIR);
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.label14);
@@ -645,6 +649,24 @@
             this.parsareFisier.UseVisualStyleBackColor = true;
             this.parsareFisier.Click += new System.EventHandler(this.parsareFisier_Click);
             // 
+            // influentaIR
+            // 
+            this.influentaIR.AutoSize = true;
+            this.influentaIR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.influentaIR.Location = new System.Drawing.Point(21, 193);
+            this.influentaIR.Name = "influentaIR";
+            this.influentaIR.Size = new System.Drawing.Size(109, 25);
+            this.influentaIR.TabIndex = 19;
+            this.influentaIR.Text = "influentaIR:";
+            // 
+            // influentaIrTextBox
+            // 
+            this.influentaIrTextBox.Location = new System.Drawing.Point(142, 187);
+            this.influentaIrTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.influentaIrTextBox.Name = "influentaIrTextBox";
+            this.influentaIrTextBox.Size = new System.Drawing.Size(180, 35);
+            this.influentaIrTextBox.TabIndex = 20;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -727,6 +749,8 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ListBox traceFilesListBox;
         private System.Windows.Forms.Button parsareFisier;
+        private System.Windows.Forms.TextBox influentaIrTextBox;
+        private System.Windows.Forms.Label influentaIR;
     }
 }
 
